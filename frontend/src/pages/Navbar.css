@@ -1,39 +1,79 @@
-.navbar {
+.navbar-herbal {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffe4e1;
-  padding: 15px 30px;
-  border-bottom: 2px solid #ffb6c1;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(90deg, #e8f5e9 0%, #ffe082 100%);
+  padding: 14px 34px;
+  box-shadow: 0 2px 12px rgba(56, 142, 60, 0.08);
+  border-bottom: 2px solid #a5d6a7;
+  border-radius: 0 0 18px 18px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
 }
 
-.logo {
-  font-size: 22px;
-  font-weight: bold;
-  color: #d63384;
-  letter-spacing: 1px;
+.navbar-logo {
+  font-size: 25px;
+  font-weight: 700;
+  color: #388e3c;
+  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
 }
 
-.nav-links button {
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-links button {
   background: none;
   border: none;
-  font-size: 16px;
+  font-size: 17px;
   margin-left: 20px;
   cursor: pointer;
-  color: #333;
+  color: #5d4037;
   font-weight: 500;
-  transition: all 0.3s ease;
+  padding: 6px 16px;
+  border-radius: 7px;
+  transition: all 0.3s;
+  font-family: inherit;
+  outline: none;
+  position: relative;
 }
 
-.nav-links button:hover {
-  color: #d63384;
-  transform: scale(1.05);
+.navbar-links button:hover {
+  background: #ffd54f44;
+  color: #388e3c;
+  box-shadow: 0 2px 12px rgba(189, 183, 107, 0.12);
+  transform: scale(1.05) translateY(-2px);
 }
 
-.nav-links .active {
-  color: #d63384;
-  font-weight: 600;
-  border-bottom: 2px solid #d63384;
-  padding-bottom: 3px;
+.navbar-active {
+  color: #388e3c !important;
+  font-weight: 700;
+  background: #ffd54f;
+  border-bottom: 3px solid #81c784;
+  padding-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(56, 142, 60, 0.1);
+}
+
+@media (max-width: 600px) {
+  .navbar-herbal {
+    flex-direction: column;
+    padding: 10px 12px;
+    border-radius: 0 0 12px 12px;
+  }
+  .navbar-logo {
+    font-size: 19px;
+    margin-bottom: 8px;
+  }
+  .navbar-links button {
+    font-size: 15px;
+    margin-left: 6px;
+    padding: 6px 10px;
+  }
 }

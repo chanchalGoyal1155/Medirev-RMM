@@ -1,32 +1,33 @@
-// src/components/Navbar.js
 import React from "react";
 import "./Navbar.css";
 
 function Navbar({ setPage, currentPage }) {
   return (
-    <nav className="navbar">
-      <div className="logo">Medirev RRM</div>
-      <div className="nav-links">
+    <nav className="navbar-herbal">
+      <div className="navbar-logo">
+        <span role="img" aria-label="herbal">🌿</span> Medirev RRM
+      </div>
+      <div className="navbar-links">
         <button
-          className={currentPage === "herbs" ? "active" : ""}
+          className={currentPage === "herbs" ? "navbar-active" : ""}
           onClick={() => setPage("herbs")}
         >
           Herbs
         </button>
         <button
-          className={currentPage === "products" ? "active" : ""}
+          className={currentPage === "products" ? "navbar-active" : ""}
           onClick={() => setPage("products")}
         >
           Products
         </button>
         <button
-          className={currentPage === "calc" ? "active" : ""}
+          className={currentPage === "calc" ? "navbar-active" : ""}
           onClick={() => setPage("calc")}
         >
           Calculation
         </button>
         <button
-          className={currentPage === "about" ? "active" : ""}
+          className={currentPage === "about" ? "navbar-active" : ""}
           onClick={() => setPage("about")}
         >
           About
