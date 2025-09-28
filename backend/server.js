@@ -7,7 +7,7 @@ import calcRoutes from "./routes/calcRoutes.js";
 import herbRoutes from "./routes/herbRoutes.js";
 import stockRoutes from "./routes/stockRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
-
+import blogRoutes from "./routes/blogRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -21,6 +21,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/calc", calcRoutes);
 app.use("/api/stock", stockRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/blogs", blogRoutes);
 // basic route
 app.get("/", (req, res) => {
     res.send("Raw Material Management API running...");

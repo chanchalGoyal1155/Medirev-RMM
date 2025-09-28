@@ -6,6 +6,7 @@ import Calculation from "./pages/Calculation";
 import About from "./pages/About";
 import Home from "./pages/Home";
 import Navbar from "./pages/Navbar";
+import Blogs from "./pages/Blogs";
 
 function App() {
   const [page, setPage] = useState("home");
@@ -19,6 +20,7 @@ function App() {
       {page === "products" && <Products />}
       {page === "calc" && <Calculation />}
       {page === "about" && <About />}
+      {page === "blogs" && <Blogs />}
     </div>
   );
 }

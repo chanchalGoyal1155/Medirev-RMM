@@ -39,6 +39,7 @@ function Navbar({ setPage, currentPage }) {
                 >
                     About
                 </button>
+                <button onClick={() => setPage("blogs")} style={{ marginRight: "10px" }}>Blogs</button>
             </div>
         </nav>
     );
