@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./Products.css"; // Import the CSS
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -13,11 +14,8 @@ const Products = () => {
   const [editData, setEditData] = useState(null);
 
   const units = ["g", "ml", "kg", "l"];
+  const categoryOptions = ["Syrup", "Oil", "Capsule", "Tablet", "Resin"];
 
-  // ✅ NEW: categories dropdown options
-  const categoryOptions = ["Syrup", "Oil", "Capsule", "Tablet","Resin"];
-
-  // Fetch products
   const fetchProducts = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/products");
@@ -27,7 +25,6 @@ const Products = () => {
     }
   };
 
-  // Fetch herbs
   const fetchHerbs = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/herbs");
@@ -42,7 +39,6 @@ const Products = () => {
     fetchHerbs();
   }, []);
 
-  // Add product
   const addProduct = async (e) => {
     e.preventDefault();
     try {
@@ -64,7 +60,6 @@ const Products = () => {
     }
   };
 
-  // Delete product
   const deleteProduct = async (id) => {
     try {
       await axios.delete(`http://localhost:5000/api/products/${id}`);
@@ -74,7 +69,6 @@ const Products = () => {
     }
   };
 
-  // Start editing
   const startEdit = (product) => {
     setEditId(product._id);
     setEditData({
@@ -87,7 +81,6 @@ const Products = () => {
     });
   };
 
-  // Update product
   const updateProduct = async (e) => {
     e.preventDefault();
     try {
@@ -100,7 +93,6 @@ const Products = () => {
     }
   };
 
-  // Formula handling
   const handleFormulaChange = (index, field, value, isEdit = false) => {
     if (isEdit) {
       const newFormula = [...editData.formula];
@@ -135,56 +127,64 @@ const Products = () => {
   };
 
   return (
-    <div>
-      <h2>Product Management</h2>
+    <div className="products-glass-bg">
+      <div className="products-header">
+        <span className="products-header-icon">🧪🌿</span>
+        <h2 className="products-title">Product Management</h2>
+      </div>
       {/* Add Product */}
-      <form onSubmit={addProduct}>
-        <input
-          type="text"
-          placeholder="Product Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        {/* ✅ UPDATED: Category dropdown */}
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          required
-        >
-          <option value="">Select Category</option>
-          {categoryOptions.map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
-        <input
-          type="number"
-          placeholder="Base Quantity"
-          value={baseQuantity}
-          onChange={(e) => setBaseQuantity(e.target.value)}
-          required
-        />
-        <select
-          value={baseUnit}
-          onChange={(e) => setBaseUnit(e.target.value)}
-          required
-        >
-          <option value="">Select Base Unit</option>
-          {units.map((u) => (
-            <option key={u} value={u}>
-              {u}
-            </option>
-          ))}
-        </select>
-
-        <h3>Formula</h3>
+      <form onSubmit={addProduct} className="products-form glass-card">
+        <div className="form-row">
+          <input
+            type="text"
+            placeholder="Product Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="products-input"
+          />
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+            className="products-input"
+          >
+            <option value="">Select Category</option>
+            {categoryOptions.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
+          <input
+            type="number"
+            placeholder="Base Quantity"
+            value={baseQuantity}
+            onChange={(e) => setBaseQuantity(e.target.value)}
+            required
+            className="products-input"
+          />
+          <select
+            value={baseUnit}
+            onChange={(e) => setBaseUnit(e.target.value)}
+            required
+            className="products-input"
+          >
+            <option value="">Select Base Unit</option>
+            {units.map((u) => (
+              <option key={u} value={u}>
+                {u}
+              </option>
+            ))}
+          </select>
+        </div>
+        <h3 className="products-subtitle">Formula</h3>
         {formula.map((f, index) => (
-          <div key={index} style={{ marginBottom: "5px" }}>
+          <div key={index} className="formula-row animate-fade">
             <select
               value={f.herbId}
               onChange={(e) => handleFormulaChange(index, "herbId", e.target.value)}
+              className="products-input"
             >
               <option value="">Select Herb</option>
               {herbs.map((h) => (
@@ -198,11 +198,12 @@ const Products = () => {
               placeholder="Qty"
               value={f.qty}
               onChange={(e) => handleFormulaChange(index, "qty", e.target.value)}
-              style={{ marginLeft: "5px", marginRight: "5px" }}
+              className="products-input"
             />
             <select
               value={f.unit}
               onChange={(e) => handleFormulaChange(index, "unit", e.target.value)}
+              className="products-input"
             >
               <option value="">Select Unit</option>
               {units.map((u) => (
@@ -214,78 +215,85 @@ const Products = () => {
             <button
               type="button"
               onClick={() => removeFormulaRow(index)}
-              style={{ marginLeft: "5px" }}
+              className="products-btn remove-btn"
             >
-              Remove
+              ❌
             </button>
           </div>
         ))}
-        <button type="button" onClick={() => addFormulaRow()}>
-          Add Herb to Formula
-        </button>
-        <button type="submit" style={{ marginLeft: "10px" }}>
-          Add Product
-        </button>
+        <div className="form-actions">
+          <button type="button" onClick={() => addFormulaRow()} className="products-btn add-row-btn">
+            ➕ Add Herb
+          </button>
+          <button type="submit" className="products-btn submit-btn">
+            ✅ Add Product
+          </button>
+        </div>
       </form>
 
       {/* Edit Product */}
       {editId && (
-        <form onSubmit={updateProduct} style={{ marginTop: "20px" }}>
-          <h3>Edit Product</h3>
-          <input
-            type="text"
-            value={editData.name}
-            onChange={(e) =>
-              setEditData({ ...editData, name: e.target.value })
-            }
-            required
-          />
-          {/* ✅ UPDATED: Edit category dropdown */}
-          <select
-            value={editData.category}
-            onChange={(e) =>
-              setEditData({ ...editData, category: e.target.value })
-            }
-            required
-          >
-            <option value="">Select Category</option>
-            {categoryOptions.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-          <input
-            type="number"
-            value={editData.baseQuantity}
-            onChange={(e) =>
-              setEditData({ ...editData, baseQuantity: e.target.value })
-            }
-            required
-          />
-          <select
-            value={editData.baseUnit}
-            onChange={(e) =>
-              setEditData({ ...editData, baseUnit: e.target.value })
-            }
-            required
-          >
-            <option value="">Select Base Unit</option>
-            {units.map((u) => (
-              <option key={u} value={u}>
-                {u}
-              </option>
-            ))}
-          </select>
-
-          <h3>Formula</h3>
+        <form onSubmit={updateProduct} className="products-form glass-card">
+          <h3 className="products-subtitle">Edit Product</h3>
+          <div className="form-row">
+            <input
+              type="text"
+              value={editData.name}
+              onChange={(e) =>
+                setEditData({ ...editData, name: e.target.value })
+              }
+              required
+              className="products-input"
+            />
+            <select
+              value={editData.category}
+              onChange={(e) =>
+                setEditData({ ...editData, category: e.target.value })
+              }
+              required
+              className="products-input"
+            >
+              <option value="">Select Category</option>
+              {categoryOptions.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
+            <input
+              type="number"
+              value={editData.baseQuantity}
+              onChange={(e) =>
+                setEditData({ ...editData, baseQuantity: e.target.value })
+              }
+              required
+              className="products-input"
+            />
+            <select
+              value={editData.baseUnit}
+              onChange={(e) =>
+                setEditData({ ...editData, baseUnit: e.target.value })
+              }
+              required
+              className="products-input"
+            >
+              <option value="">Select Base Unit</option>
+              {units.map((u) => (
+                <option key={u} value={u}>
+                  {u}
+                </option>
+              ))}
+            </select>
+          </div>
+          <h3 className="products-subtitle">Formula</h3>
           {editData.formula.map((f, index) => (
-            <div key={index} style={{ marginBottom: "5px" }}>
+            <div key={index} className="formula-row animate-fade">
               <select
                 value={f.herbId}
                 onChange={(e) =>
                   handleFormulaChange(index, "herbId", e.target.value, true)
                 }
+                className="products-input"
               >
                 <option value="">Select Herb</option>
                 {herbs.map((h) => (
@@ -300,13 +308,14 @@ const Products = () => {
                 onChange={(e) =>
                   handleFormulaChange(index, "qty", e.target.value, true)
                 }
-                style={{ marginLeft: "5px", marginRight: "5px" }}
+                className="products-input"
               />
               <select
                 value={f.unit}
                 onChange={(e) =>
                   handleFormulaChange(index, "unit", e.target.value, true)
                 }
+                className="products-input"
               >
                 <option value="">Select Unit</option>
                 {units.map((u) => (
@@ -318,74 +327,75 @@ const Products = () => {
               <button
                 type="button"
                 onClick={() => removeFormulaRow(index, true)}
-                style={{ marginLeft: "5px" }}
+                className="products-btn remove-btn"
               >
-                Remove
+                ❌
               </button>
             </div>
           ))}
-          <button type="button" onClick={() => addFormulaRow(true)}>
-            Add Herb to Formula
-          </button>
-          <button type="submit" style={{ marginLeft: "10px" }}>
-            Update Product
-          </button>
+          <div className="form-actions">
+            <button type="button" onClick={() => addFormulaRow(true)} className="products-btn add-row-btn">
+              ➕ Add Herb
+            </button>
+            <button type="submit" className="products-btn submit-btn">
+              ✏️ Update Product
+            </button>
+          </div>
         </form>
       )}
 
       {/* Product List */}
-      <h3 style={{ marginTop: "20px" }}>All Products</h3>
-      <table border="1" cellPadding="5" style={{ borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Base Quantity</th>
-            <th>Base Unit</th>
-            <th>Formula</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map((p) => (
-            <tr key={p._id}>
-              <td>{p.name}</td>
-              <td>{p.category}</td>
-              <td>{p.baseQuantity}</td>
-              <td>{p.baseUnit}</td>
-              <td>
-                <ul>
-                  {p.formula.map((f) => {
-                    const herbName =
-                      herbs.find((h) => h._id === f.herbId)?.name ||
-                      f.herb?.name;
-                    return (
-                      <li
-                        key={f._id}
-                        style={{
-                          color: f.qty === 0 ? "grey" : "black",
-                          fontStyle: f.qty === 0 ? "italic" : "normal",
-                        }}
-                      >
-                        {herbName} - {f.qty} {f.unit}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </td>
-              <td>
-                <button onClick={() => startEdit(p)}>Edit</button>
-                <button
-                  onClick={() => deleteProduct(p._id)}
-                  style={{ marginLeft: "5px" }}
-                >
-                  Delete
-                </button>
-              </td>
+      <h3 className="products-subtitle" style={{ marginTop: "24px" }}>All Products</h3>
+      <div className="products-table-wrapper animate-table">
+        <table className="products-table glass-card">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Base Quantity</th>
+              <th>Base Unit</th>
+              <th>Formula</th>
+              <th>Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {products.map((p) => (
+              <tr key={p._id} className="table-row-animate">
+                <td>{p.name}</td>
+                <td>{p.category}</td>
+                <td>{p.baseQuantity}</td>
+                <td>{p.baseUnit}</td>
+                <td>
+                  <ul className="formula-list">
+                    {p.formula.map((f) => {
+                      const herbName =
+                        herbs.find((h) => h._id === f.herbId)?.name ||
+                        f.herb?.name;
+                      return (
+                        <li
+                          key={f._id}
+                          className={f.qty === 0 ? "formula-item formula-zero" : "formula-item"}
+                        >
+                          🌱 {herbName} - {f.qty} {f.unit}
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </td>
+                <td>
+                  <button onClick={() => startEdit(p)} className="products-btn edit-btn">✏️</button>
+                  <button
+                    onClick={() => deleteProduct(p._id)}
+                    className="products-btn delete-btn"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
-// pages/Calculation.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "./Calculation.css"; // Add this import
 
 const Calculation = () => {
   const [products, setProducts] = useState([]);
@@ -38,8 +38,7 @@ const Calculation = () => {
         targetQty: Number(targetQty),
       });
 
-      const productReq = res.data.requirements; // only herbs in formula
-      // Merge with all herbs, show 0 if not in formula
+      const productReq = res.data.requirements;
       const merged = herbs.map((h) => {
         const found = productReq.find((r) => r.herbName === h.name);
         return {
@@ -58,15 +57,16 @@ const Calculation = () => {
   };
 
   return (
-    <div style={{ padding: "20px", maxWidth: "700px", margin: "0 auto" }}>
-      <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Calculate Herbs for Target Quantity</h2>
+    <div className="calc-container">
+      <h2 className="calc-title">🌿 Calculate Herbs for Target Quantity</h2>
 
-      {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+      {error && <p className="calc-error">{error}</p>}
 
-      <div style={{ display: "flex", gap: "10px", marginBottom: "20px", justifyContent: "center" }}>
+      <div className="calc-form">
         <select
           value={selectedProduct}
           onChange={(e) => setSelectedProduct(e.target.value)}
+          className="calc-select"
         >
           <option value="">--Select Product--</option>
           {products.map((p) => (
@@ -81,30 +81,33 @@ const Calculation = () => {
           placeholder="Target Quantity"
           value={targetQty}
           onChange={(e) => setTargetQty(e.target.value)}
+          className="calc-input"
         />
 
-        <button onClick={calculate}>Calculate</button>
+        <button onClick={calculate} className="calc-btn">Calculate</button>
       </div>
 
       {requirements.length > 0 && (
-        <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
-          <thead>
-            <tr style={{ backgroundColor: "#f0f0f0ff" }}>
-              <th style={{ border: "1px solid #ccc", padding: "8px" }}>Herb</th>
-              <th style={{ border: "1px solid #ccc", padding: "8px" }}>Quantity</th>
-              <th style={{ border: "1px solid #ccc", padding: "8px" }}>Unit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {requirements.map((r, i) => (
-              <tr key={i}>
-                <td style={{ border: "1px solid #ccc", padding: "8px" }}>{r.name}</td>
-                <td style={{ border: "1px solid #ccc", padding: "8px" }}>{r.qty}</td>
-                <td style={{ border: "1px solid #ccc", padding: "8px" }}>{r.unit}</td>
+        <div className="calc-table-wrapper">
+          <table className="calc-table">
+            <thead>
+              <tr>
+                <th>Herb</th>
+                <th>Quantity</th>
+                <th>Unit</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {requirements.map((r, i) => (
+                <tr key={i}>
+                  <td>{r.name}</td>
+                  <td>{r.qty}</td>
+                  <td>{r.unit}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
