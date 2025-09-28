@@ -89,7 +89,7 @@ const Calculation = () => {
       {requirements.length > 0 && (
         <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
           <thead>
-            <tr style={{ backgroundColor: "#f0f0f0" }}>
+            <tr style={{ backgroundColor: "#f0f0f0ff" }}>
               <th style={{ border: "1px solid #ccc", padding: "8px" }}>Herb</th>
               <th style={{ border: "1px solid #ccc", padding: "8px" }}>Quantity</th>
               <th style={{ border: "1px solid #ccc", padding: "8px" }}>Unit</th>

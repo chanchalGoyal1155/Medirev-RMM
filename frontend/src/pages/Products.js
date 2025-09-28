@@ -15,7 +15,7 @@ const Products = () => {
   const units = ["g", "ml", "kg", "l"];
 
   // ✅ NEW: categories dropdown options
-  const categoryOptions = ["Syrup", "Oil", "Capsule", "Tablet"];
+  const categoryOptions = ["Syrup", "Oil", "Capsule", "Tablet","Resin"];
 
   // Fetch products
   const fetchProducts = async () => {
