@@ -5,7 +5,7 @@ function Navbar({ setPage, currentPage }) {
     return (
         <nav className="navbar-herbal">
             <div className="navbar-logo">
-                <span role="img" aria-label="herbal">🌿</span> Medirev RRM
+                <span role="img" aria-label="herbal">🌿</span> Medirev RMM
             </div>
             <div className="navbar-links">
                 <button

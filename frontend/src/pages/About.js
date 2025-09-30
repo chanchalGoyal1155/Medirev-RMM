@@ -5,16 +5,15 @@ const About = () => {
   return (
     <div className="aboutpage-container">
       <h1 className="aboutpage-title">
-        <span role="img" aria-label="herbal">🌱</span> About Medirev Raw Material Management (RRM)
+        <span role="img" aria-label="herbal">🌱</span> About Medirev Raw Material Management (RMM)
       </h1>
 
       <section className="aboutpage-section aboutpage-card">
         <div className="aboutpage-icon-circle">🌿</div>
-        <h2>About RRM System</h2>
+        <h2>About RMM System</h2>
         <p>
-          The Raw Material Management (RRM) system empowers Medirev to track and manage precious herbs,
-          ayurvedic ingredients, and production calculations. It ensures accurate material usage and 
-          optimal stock balance for every batch of our natural medicines.
+          The Raw Material Management (RMM) system empowers Medirev to track and manage precious herbs,
+          ayurvedic ingredients, and production calculations. It ensures accurate material usage.
         </p>
       </section>
 
