@@ -16,7 +16,7 @@ const Herbs = () => {
   // Fetch all herbs
   const fetchHerbs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/herbs");
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/herbs`);
       setHerbs(res.data);
     } catch (err) {
       console.log(err);
@@ -33,7 +33,7 @@ const Herbs = () => {
     e.preventDefault();
     if (!name || !unit) return setError("Name & Unit required");
     try {
-      await axios.post("http://localhost:5000/api/herbs", { name, unit });
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/herbs`, { name, unit });
       setName("");
       setUnit("");
       setError("");
@@ -62,7 +62,7 @@ const Herbs = () => {
   const saveEdit = async () => {
     if (!editName || !editUnit) return setError("Name & Unit required");
     try {
-      await axios.put(`http://localhost:5000/api/herbs/${editId}`, {
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/herbs/${editId}`, {
         name: editName,
         unit: editUnit,
       });
@@ -79,7 +79,7 @@ const Herbs = () => {
   const deleteHerb = async (id) => {
     if (!window.confirm("Are you sure you want to delete this herb?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/herbs/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/herbs/${id}`);
       fetchHerbs();
     } catch (err) {
       console.log(err);

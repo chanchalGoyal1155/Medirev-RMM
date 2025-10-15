@@ -18,7 +18,7 @@ const Products = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/products");
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`);
       setProducts(res.data);
     } catch (err) {
       console.error(err);
@@ -27,7 +27,7 @@ const Products = () => {
 
   const fetchHerbs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/herbs");
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/herbs`);
       setHerbs(res.data);
     } catch (err) {
       console.error(err);
@@ -42,7 +42,7 @@ const Products = () => {
   const addProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/api/products", {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/products`, {
         name,
         category,
         baseQuantity,
@@ -62,7 +62,7 @@ const Products = () => {
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/api/products/${id}`);
       fetchProducts();
     } catch (err) {
       console.error(err);
@@ -84,7 +84,7 @@ const Products = () => {
   const updateProduct = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/products/${editId}`, editData);
+      await axios.put(`${process.env.REACT_APP_API_URL}/api/products/${editId}`, editData);
       setEditId(null);
       setEditData(null);
       fetchProducts();

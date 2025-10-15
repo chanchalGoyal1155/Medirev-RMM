@@ -14,8 +14,8 @@ const Calculation = () => {
     const fetchProductsAndHerbs = async () => {
       try {
         const [pRes, hRes] = await Promise.all([
-          axios.get("http://localhost:5000/api/products"),
-          axios.get("http://localhost:5000/api/herbs")
+          axios.get(`${process.env.REACT_APP_API_URL}/api/products`),
+          axios.get(`${process.env.REACT_APP_API_URL}/api/herbs`)
         ]);
         setProducts(pRes.data);
         setHerbs(hRes.data);
@@ -33,7 +33,7 @@ const Calculation = () => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/calc", {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/api/calc`, {
         productId: selectedProduct,
         targetQty: Number(targetQty),
       });

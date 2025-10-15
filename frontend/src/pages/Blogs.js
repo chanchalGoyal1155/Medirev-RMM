@@ -12,13 +12,13 @@ const Blogs = () => {
 
   // Fetch blogs
   const fetchBlogs = async () => {
-    const res = await axios.get("http://localhost:5000/api/blogs");
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/blogs`);
     setBlogs(res.data);
   };
 
   // Fetch products
   const fetchProducts = async () => {
-    const res = await axios.get("http://localhost:5000/api/products");
+    const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/products`);
     setProducts(res.data);
   };
 
@@ -30,13 +30,13 @@ const Blogs = () => {
   const addBlog = async (e) => {
     e.preventDefault();
     if (!productId || !title || !content) return alert("All fields required");
-    await axios.post("http://localhost:5000/api/blogs", { productId, title, content });
+    await axios.post(`${process.env.REACT_APP_API_URL}/api/blogs`, { productId, title, content });
     setTitle(""); setContent(""); setProductId("");
     fetchBlogs();
   };
 
   const deleteBlog = async (id) => {
-    await axios.delete(`http://localhost:5000/api/blogs/${id}`);
+    await axios.delete(`${process.env.REACT_APP_API_URL}/api/blogs/${id}`);
     fetchBlogs();
   };
 
@@ -49,7 +49,7 @@ const Blogs = () => {
 
   const updateBlog = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:5000/api/blogs/${editId}`, { title, content });
+    await axios.put(`${process.env.REACT_APP_API_URL}/api/blogs/${editId}`, { title, content });
     setEditId(null);
     setTitle(""); setContent(""); setProductId("");
     fetchBlogs();
