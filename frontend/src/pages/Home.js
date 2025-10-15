@@ -11,6 +11,9 @@ function Home() {
         </h1>
         <p className="home-subtitle-anim">
           Streamline your raw material tracking, product formulation, and stock calculation — all in one place.
+          Streamline your raw material tracking, product formulation, and stock calculation — all in one place.
+
+
         </p>
         <div className="home-highlight-anim">
           <p>
