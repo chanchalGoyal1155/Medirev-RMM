@@ -6,11 +6,12 @@
   background: linear-gradient(120deg, #e8f5e9 0%, #fffde4 100%);
   position: relative;
   overflow: hidden;
+  padding: 20px; /* 📱 Responsive fix: thoda padding add kiya taaki phone me edges se chipke nahi */
 }
 
 .home-glass-card {
   max-width: 700px;
-  width: 98vw;
+  width: 100%; /* 📱 Responsive fix: 98vw → 100% */
   background: rgba(255,255,255,0.73);
   border-radius: 30px;
   padding: 46px 40px 38px 40px;
@@ -102,6 +103,7 @@
   gap: 18px;
   font-size: 1.6rem;
   margin-top: 15px;
+  flex-wrap: wrap;/* 📱 Responsive fix: phone pe emoji wrap ho sake */
   animation: leavesFadeIn 1.5s;
 }
 
@@ -110,20 +112,58 @@
   100% { opacity: 1; transform: translateY(0);}
 }
 
-/* Responsive Design */
-@media (max-width: 700px) {
+
+/* 📱 Responsive Design Start */
+@media (max-width: 900px) {
   .home-glass-card {
-    padding: 18px 8px 18px 8px;
-    border-radius: 17px;
+    padding: 28px 18px; /* 📱 Reduced padding for medium screens */
   }
-  .home-title-anim {
-    font-size: 1.27rem;
-  }
+
   .home-logo-anim {
-    font-size: 2.1rem;
+    font-size: 2.3rem; /* 📱 Smaller logo font */
   }
+
+  .home-title-anim {
+    font-size: 1.7rem; /* 📱 Smaller heading */
+  }
+
+  .home-subtitle-anim {
+    font-size: 1.05rem; /* 📱 Adjusted paragraph font */
+  }
+
   .home-highlight-anim {
     font-size: 0.98rem;
-    padding: 11px 7px;
+    padding: 14px 12px;
   }
 }
+
+@media (max-width: 600px) {
+  .home-glass-card {
+    padding: 20px 12px; /* 📱 Compact padding for mobile */
+    border-radius: 20px; /* 📱 Rounded edges thoda kam kiya */
+  }
+
+  .home-logo-anim {
+    font-size: 1.9rem; /* 📱 Smaller logo */
+  }
+
+  .home-title-anim {
+    font-size: 1.3rem; /* 📱 Heading resize */
+  }
+
+  .home-subtitle-anim {
+    font-size: 0.95rem;
+    line-height: 1.5; /* 📱 Better readability */
+  }
+
+  .home-highlight-anim {
+    font-size: 0.9rem;
+    padding: 10px 8px;
+  }
+
+  .home-ayur-leaves {
+    font-size: 1.3rem;
+    gap: 12px;
+  }
+}
+/* 📱 Responsive Design End */

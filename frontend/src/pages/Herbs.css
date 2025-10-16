@@ -38,6 +38,10 @@
   outline: none;
   transition: border 0.2s;
   background: #f8fff8;
+  flex: 1 1 150px;
+  /* 🟢 Added: Inputs flex nicely on small screens */
+  min-width: 120px;
+  /* 🟢 Added: Avoid too small input */
 }
 
 .herbs-input:focus {
@@ -55,6 +59,8 @@
   margin-left: 4px;
   transition: background 0.2s, color 0.2s, box-shadow 0.2s;
   outline: none;
+  flex-shrink: 0;
+  /* 🟢 Added: Prevent buttons from shrinking too small */
 }
 
 .herbs-add-btn {
@@ -162,19 +168,43 @@
 
 @media (max-width: 600px) {
   .herbs-container {
-    padding: 10px 3px;
+    padding: 10px 10px;
   }
+
   .herbs-form {
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px 7px;
+    flex-direction: column; /* stack all vertically */
+    align-items: center; /* 🟢 center all children */
+    gap: 12px; /* 🟢 balanced spacing */
+    padding: 12px 10px;
   }
+
+  .herbs-input {
+    width: 85%; /* 🟢 compact width */
+    max-width: 260px;
+    padding: 5px 9px; /* 🟢 reduced padding -> smaller height */
+    font-size: 0.9rem; /* 🟢 text proportion */
+    max-height: 50px; /* 🟢 fixed reasonable height */
+  }
+
+  .herbs-btn {
+    width: 70%;
+    padding: 6px 10px; /* 🟢 smaller height buttons */
+    margin-top: 3px;
+    font-size: 0.9rem;
+  }
+
+  .herbs-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+
+  .herbs-table-wrapper {
+    overflow-x: auto;
+  }
+
   .herbs-table th,
   .herbs-table td {
-    padding: 7px 6px;
-    font-size: 0.97rem;
-  }
-  .herbs-title {
-    font-size: 1.19rem;
+    padding: 8px 6px;
+    font-size: 0.9rem;
   }
 }

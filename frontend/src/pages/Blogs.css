@@ -213,7 +213,7 @@
     gap: 7px;
   }
   .blogs-input, .blogs-textarea {
-    min-width: 95vw;
+    min-width: 85vw;
     font-size: 0.98rem;
   }
   .blogs-card {

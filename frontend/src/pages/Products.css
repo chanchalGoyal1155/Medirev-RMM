@@ -44,6 +44,8 @@
   background: #f8fff8;
   transition: border 0.2s;
   min-width: 140px;
+  max-width: 100%; /* ✅ Added: ensures input never exceeds screen width */
+  box-sizing: border-box; /* ✅ keeps padding within total width */
 }
 
 .products-input:focus {
@@ -144,6 +146,7 @@
   align-items: center;
   margin-bottom: 7px;
   animation: fadeInRow 0.5s;
+  flex-wrap: wrap; /* ✅ Added: allows inputs to wrap instead of overflowing */
 }
 
 @keyframes fadeInRow {
