@@ -43,8 +43,8 @@ const Calculation = () => {
         const found = productReq.find((r) => r.herbName === h.name);
         return {
           name: h.name,
-          qty: found ? found.requiredQty : 0,
-          unit: h.unit,
+          qty: found ? +found.requiredQty.toFixed(2) : 0, // 2 decimals for readability
+          unit: found ? found.unit : h.unit, // use backend calculated unit
         };
       });
 
